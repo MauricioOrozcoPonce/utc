@@ -1,0 +1,137 @@
+<div class="row">
+    <div class="col-lg-8"> 
+        <div class="wrapper  ml-4 mb-4 w-100" >
+            <h2>REPORTE DE AVANCE CUATRIMESTRAL DEL PROGRAMA DE TRABAJO DE CONTROL INTERNO (PTCI)</h2>
+            <form [formGroup]="form">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label>Dependencia/Entidad</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Dependencia/Entidad" formControlName="dependencia"> 
+                        </div>
+                    </div>         
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label>No. de Avance</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="No. de Avance" formControlName="no_avance">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Periodo Anual</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Periodo Anual" formControlName="periodo_anual">
+                        </div>
+                    </div>
+                </div>
+            
+    
+                <ng-container *ngFor="let o of procesos.controls; let i = index" formArrayName="procesos">
+                    <ng-container [formGroupName]="i"> 
+                        <hr class="mb-5 mt-5">
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <label>No.</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="No." formControlName="no">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Proceso Prioritario</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Acciones de Mejora" formControlName="proceso_prioritario">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label>Acciones de Mejora</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Acciones de Mejora" formControlName="accion_mejora">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <label>Unidad Administrativa</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Unidad Administrativa" formControlName="ud_administrativa">
+                                </div>
+                            </div> 
+                            <div class="col-lg-6">
+                                <label>Responsable de la Aplicación</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Responsable de la Aplicación" formControlName="respons_aplicacion">
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="row mb-3">
+                            <div class="input-group">
+                                <p  class="fs-5">Fechas</p>   
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Inicio</label>
+                                <div class="input-group mb-3">
+                                    <input type="date" class="form-control" placeholder="Inicio" formControlName="inicio">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Término</label>
+                                <div class="input-group mb-3">
+                                    <input type="date" class="form-control" placeholder="Término" formControlName="termino">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3"> 
+                            <label>Medio(s) de Verificación</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Medio(s) de Verificación" formControlName="medio_verificacion">
+                            </div>
+                        </div>    
+                        <div class="row mb-3">
+                            <label>Resultados Esperados</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Resultados Esperados" formControlName="resultados_esperados">
+                            </div>
+                        </div>  
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <label>Estatus</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Estatus" formControlName="estatus_proceso">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Porcentaje del Avance</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Porcentaje del Avance" formControlName="avance">
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+                <div class="row">
+                    <div class="col">
+                        
+                    </div>
+                    <div class="col d-flex justify-content-end">
+                        <button class="btn btn-success mr-2" style="width: 150px;" (click)="validar('Aceptado')"><i class="fas fa-check"></i> Aceptar</button>
+                        <button class="btn btn-danger"  style="width: 150px;" (click)="validar('Rechazado')"><i class="fas fa-times"></i> Rechazar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <app-archivos></app-archivos>
+        <app-comentarios></app-comentarios>
+    </div>     
+</div>
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11" *ngIf="toast">
+    <div id="liveToast" class="toast show fade bg-success text-white" [ngClass]="estilo" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">{{msg}}</div>
+    </div>
+</div>
+
+
+
+

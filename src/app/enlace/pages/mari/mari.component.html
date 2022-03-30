@@ -1,0 +1,581 @@
+<div class="wrapper ml-4">
+    <form autocomplete="off" [formGroup]="form">
+    <div class="input-group">
+        <p  class="fs-5"> Administración de Riesgos Institucional</p>   
+    </div>
+    
+    <div class="row mb-3">
+        <div class="col">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Dependencia/Entidad" formControlName="dependencia">
+                <button class="btn btn-secondary btninfo p-0" type="button">
+                    <span class='fa-stack fa-lg'>
+                        <i class='fas fa-circle fa-stack-2x'></i>
+                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Institución" formControlName="institucion">
+                <button class="btn btn-secondary btninfo p-0" type="button">
+                    <span class='fa-stack fa-lg'>
+                        <i class='fas fa-circle fa-stack-2x'></i>
+                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-lg-2">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Año" formControlName="anio">
+                <button class="btn btn-secondary btninfo p-0" type="button">
+                    <span class='fa-stack fa-lg'>
+                        <i class='fas fa-circle fa-stack-2x'></i>
+                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <div class="col">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Titular del Sujeto Obligado" formControlName="titular">
+                <button class="btn btn-secondary btninfo p-0" type="button">
+                    <span class='fa-stack fa-lg'>
+                        <i class='fas fa-circle fa-stack-2x'></i>
+                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Coordinador de Control Interno" formControlName="coordinador">
+                <button class="btn btn-secondary btninfo p-0" type="button">
+                    <span class='fa-stack fa-lg'>
+                        <i class='fas fa-circle fa-stack-2x'></i>
+                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Enlace del Sistema de Control Interno" formControlName="enlace">
+                <button class="btn btn-secondary btninfo p-0" type="button">
+                    <span class='fa-stack fa-lg'>
+                        <i class='fas fa-circle fa-stack-2x'></i>
+                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Primera parte -->
+
+
+    <ng-container *ngFor="let o of riesgos.controls; let i = index" formArrayName="riesgos">
+        <ng-container [formGroupName]="i">
+            <div class="input-group">
+                <p  class="fs-5">I. EVALUACIÓN RIESGOS</p>   
+            </div>
+            <div class="row mb-">
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="No. Riesgo"  formControlName="no_riesgo">
+                        <button class="btn btn-secondary btninfo p-0" type="button">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Unidad Administrativa" formControlName="ud_administrativa">
+                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="input-group">
+                    <p  class="fs-5">Alineación a Estrategias, Objetivos, o Metas Institucionales</p>   
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group mb-3">
+                        <select class="form-select" formControlName="sel_estrategia">
+                            <option value="" selected >Selección</option>
+                            <option value="Estrategia">Estrategia</option> 
+                            <option value="Objetivo">Objetivo</option> 
+                            <option value="Meta">Meta</option>    
+                        </select>
+                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Descripción" formControlName="desc_estrategia">
+                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">                                    
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="RIESGO" formControlName="riesgo">
+                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <select class="form-select" formControlName="nivel_decis_riesgo">
+                            <option value="" selected >Nivel de decisión  del Riesgo</option>
+                            <option value="Estrategico">Estratégico</option> 
+                            <option value="Objetivo">Directivo</option> 
+                            <option value="Meta">Operativo</option>    
+                        </select>
+                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="input-group">
+                    <p  class="fs-5">Clasificación del Riesgo</p>   
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <select class="form-select" formControlName="sel_clasificacion">
+                            <option value="" selected >Selección</option>
+                            <option *ngFor="let clas of clas_riesgo" [ngValue]="clas">{{clas}}</option> 
+                        </select>
+                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col" *ngIf="otraClasificacion(i)">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Especificar Otro" formControlName="otro">
+                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <ng-container *ngFor="let o of factoresArr(i).controls; let j = index;" formArrayName="factores">
+                <ng-container [formGroupName]="j">
+                    <div class="row mb-3">
+                        <div class="input-group">
+                            <p  class="fs-5">FACTOR</p>   
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="No. de Factor" formControlName="no_factor" >
+                                <ng-component></ng-component>
+                                <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                                    <span class='fa-stack fa-lg'>
+                                        <i class='fas fa-circle fa-stack-2x'></i>
+                                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Descripción" formControlName="desc_factor">
+                                <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                                    <span class='fa-stack fa-lg'>
+                                        <i class='fas fa-circle fa-stack-2x'></i>
+                                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <select class="form-select" formControlName="clasificacion_factor">
+                                    <option value="" selected >Clasificación</option>
+                                    <option *ngFor="let clas of clasificaciones" [ngValue]="clas">{{clas}}</option> 
+                                </select>
+                                <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                                    <span class='fa-stack fa-lg'>
+                                        <i class='fas fa-circle fa-stack-2x'></i>
+                                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <select class="form-select" formControlName="tipo_factor">
+                                    <option value="" selected >Tipo</option>
+                                    <option value="Interno">Interno</option>
+                                    <option value="Externo">Externo</option>
+                                </select>
+                                <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                                    <span class='fa-stack fa-lg'>
+                                        <i class='fas fa-circle fa-stack-2x'></i>
+                                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>                       
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col d-flex justify-content-end">
+                            <button class="btn btn-danger" (click)="borrarFactor(i, j)">
+                                Eliminar factor
+                            </button>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+            <div class="row mb-3">
+                <div class="col d-flex justify-content-end">
+                    <button class="btn btn-primary" (click)="agregarFactor(i)">
+                        Agregar factor
+                    </button>
+                </div>
+            </div>        
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Posibles efectos del Riesgo" formControlName="efectos_riesgo">
+                        <button class="btn btn-secondary btninfo p-0" type="button">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <p  class="fs-5">Valoración Inicial</p>   
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Grado Impacto" formControlName="grado_impacto">
+                        <button class="btn btn-secondary btninfo p-0" type="button">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Probabilidad de Ocurrencia" formControlName="probabilidad_ocurrencia">
+                        <button class="btn btn-secondary btninfo p-0" type="button">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>    
+        </ng-container>                   
+    </ng-container>
+
+    <ng-container *ngFor="let o of riesgos.controls; let i = index" formArrayName="riesgos">
+        <ng-container [formGroupName]="i">
+            <ng-container *ngFor="let o of factoresArr(i).controls; let j = index;" formArrayName="factores">
+                <ng-container [formGroupName]="j">
+                    <div class="input-group">
+                        <p  class="fs-5">II. EVALUACIÓN DE CONTROLES</p>   
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <select class="form-select" formControlName="control">
+                                    <option value="" selected >¿Tiene controles?</option>
+                                    <option value="Si">Si</option>
+                                    <option value="No">No</option>
+                                </select>
+                                <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                                    <span class='fa-stack fa-lg'>
+                                        <i class='fas fa-circle fa-stack-2x'></i>
+                                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-container *ngFor="let o of controlesArr(i, j).controls; let k = index" formArrayName="controles">
+                        <ng-container [formGroupName]="k">
+                            <div class="row mb-3">
+                                <div class="input-group">
+                                    <p  class="fs-5">CONTROL</p>   
+                                </div>
+                                <div class="col-3">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="No. control" formControlName="no_control">
+                                        <button class="btn btn-secondary btninfo p-0" type="button">
+                                            <span class='fa-stack fa-lg'>
+                                                <i class='fas fa-circle fa-stack-2x'></i>
+                                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Descripción" formControlName="desc_control">
+                                        <button class="btn btn-secondary btninfo p-0" type="button">
+                                            <span class='fa-stack fa-lg'>
+                                                <i class='fas fa-circle fa-stack-2x'></i>
+                                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <select class="form-select" formControlName="tipo_control">
+                                            <option value="" selected >Tipo</option>
+                                            <option value="Preventivo">Preventivo</option>
+                                            <option value="Detectivo">Detectivo</option>
+                                            <option value="Correctivo">Correctivo</option>
+                                        </select>
+                                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                                            <span class='fa-stack fa-lg'>
+                                                <i class='fas fa-circle fa-stack-2x'></i>
+                                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-group">
+                                    <p  class="fs-5">Determinación de Suficiencia o Deficiencia del Control</p>   
+                                </div>
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <select class="form-select" formControlName="documentado">
+                                            <option value="" selected >¿Está Documentado?</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                                            <span class='fa-stack fa-lg'>
+                                                <i class='fas fa-circle fa-stack-2x'></i>
+                                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <select class="form-select" formControlName="formalizado">
+                                            <option value="" selected >¿Está Formalizado?</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                                            <span class='fa-stack fa-lg'>
+                                                <i class='fas fa-circle fa-stack-2x'></i>
+                                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>     
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <select class="form-select" formControlName="aplica">
+                                            <option value="" selected >¿Se Aplica?</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                                            <span class='fa-stack fa-lg'>
+                                                <i class='fas fa-circle fa-stack-2x'></i>
+                                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="input-group mb-3">
+                                        <select class="form-select" formControlName="efectivo">
+                                            <option value="" selected >¿Es Efectivo?</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                                            <span class='fa-stack fa-lg'>
+                                                <i class='fas fa-circle fa-stack-2x'></i>
+                                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col d-flex justify-content-end">
+                                    <button class="btn btn-danger" (click)="borrarControl(i, j, k)">
+                                        Eliminar Control
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    <div class="row mb-3">
+                        <div class="col d-flex justify-content-end">
+                            <button class="btn btn-primary" (click)="agregarControl(i, j)" *ngIf="tiene_control(i, j)">
+                                Agregar Control
+                            </button>
+                        </div>
+                    </div>  
+                </ng-container>
+            </ng-container>
+            <div class="row mb-3">
+                <div class="input-group">
+                    <p  class="fs-5">III. VALORACIÓN  DE RIESGOS</p>   
+                </div>
+                <div class="input-group">
+                    <p  class="fs-5">Valoración Final</p>   
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Grado Impacto" formControlName="grado_impacto_f">
+                        <button class="btn btn-secondary btninfo p-0" type="button">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Probabilidad de Ocurrencia" formControlName="probabilidad_ocurrencia_f">
+                        <button class="btn btn-secondary btninfo p-0" type="button">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="input-group">
+                    <p  class="fs-5">IV. MAPA DE RIESGOS</p>   
+                </div>
+                <div class="col">
+                    ...
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="input-group">
+                    <p  class="fs-5">V. ESTRATEGIAS Y ACCIONES</p>   
+                </div>
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <select class="form-select" formControlName="estrat_riesgo">
+                            <option value="" selected >Estrategia para Administrar el Riesgo</option>
+                            <option value="Evitar el Riesgo">Evitar el Riesgo</option>
+                            <option value="Reducir el Riesgo">Reducir el Riesgo</option>
+                            <option value="Asumir el Riesgo">Asumir el Riesgo</option>
+                            <option value="Transferir el Riesgo">Transferir el Riesgo</option>
+                        </select>
+                        <button class="btn btn-secondary btninfo p-0" type="button" id="button-addon2">
+                            <span class='fa-stack fa-lg'>
+                                <i class='fas fa-circle fa-stack-2x'></i>
+                                <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+            <ng-container *ngFor="let o of factoresArr(i).controls; let i = index" formArrayName="factores">
+                <ng-container [formGroupName]="i">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Descripción de la(s) Acción(es)" formControlName="desc_acciones">
+                                <button class="btn btn-secondary btninfo p-0" type="button">
+                                    <span class='fa-stack fa-lg'>
+                                        <i class='fas fa-circle fa-stack-2x'></i>
+                                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+            
+        </ng-container>
+    </ng-container>
+    <button class="btn btn-primary" (click)="agregarRiesgo()">agregar riesgo</button>
+</form>
+
+</div>
+
+<pre>{{form.valid}}</pre>
+<br>
+
+<span>Value</span>
+<pre>{{form.value | json}}</pre>
+
+<pre></pre>
+<br>
+
+

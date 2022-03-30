@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+   <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+	<div class="container">
+		<input type="checkbox" id="flip">
+		<div class="cover">
+			<div class="front">
+				<img src="assets/img/lobo.jpg" alt="">    
+			</div>   
+		</div>
+		<div class="forms">
+			<div class="form-content">
+				<div class="login-form">
+					<div class="title">Login</div>
+					<form (ngSubmit)="login()" autocomplete="off" [formGroup]="loginForm">				
+						<div class="input-boxes">
+							<div class="input-box">
+								<i class="fas fa-envelope"></i>
+								<input formControlName="correo" type="email" placeholder="Ingresa tu correo">
+							</div>
+							<div class="alert alert-danger" role="alert" *ngIf="campoValido('correo') || bdValido('correo')">
+								{{ correoErrors }}
+							</div> 
+							  
+							<div class="input-box">
+								<i class="fas fa-lock"></i>
+								<input formControlName="contrasenia" type="password" placeholder="Ingresa tu contraseña">
+							</div>
+							<div class="alert alert-danger" role="alert" *ngIf="campoValido('contrasenia')">
+								{{ passwordErrors }}
+							</div>
+											  
+							<div class="button input-box">
+								<button type="submit" [disabled]="loginForm.invalid">Ingresar</button>
+							</div>
+						</div>
+					</form>
+				</div>      
+			</div>
+		</div>
+	</div>
+</body>
+</html>

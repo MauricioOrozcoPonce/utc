@@ -1,0 +1,40 @@
+
+<div class="container-fluid ml-4">
+	<div class="row mr-5">
+		<div class="col-xl-12 col-md-12 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+				<div class="card-body">
+					<h1 class="h3 mb-0 text-gray-800 mb-4">PTCI</h1>
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>No. Avance</th>
+								<th>Periodo Anual</th>
+								<th>Estatus</th>
+								<th>Elaborado</th>
+								<th>
+									<span class="p-2 rounded-pill bg-light text-dark">
+										<a routerLink="../crear-ptci" class="text-decoration-none text-dark"><i class="fas fa-plus"></i> Agregar</a>
+									</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr  *ngFor="let doc of documentos;">
+								<td>{{ doc.no_avance }}</td>
+								<td>{{ doc.periodo_anual }}</td>
+								<td><span [class]="estiloEstatus(doc.estatus)"> {{ doc.estatus }} </span></td>
+								<td>{{ doc.nombre +' '+ doc.apellido_p +' '+ doc.apellido_m }}</td>
+								<td>
+									<a routerLink="../editar-ptci/{{doc.id_ptci}}" class="pl-2 text-decoration-none"><i class="fas fa-pencil-alt"></i> Editar</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

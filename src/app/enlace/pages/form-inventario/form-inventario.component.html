@@ -1,0 +1,266 @@
+<div class="wrapper  ml-4 mb-4" >
+    <h2>INVENTARIO DE PROCESOS PRIORITARIOS</h2>
+    <form [formGroup]="form">
+        <div class="row mb-3">
+            <div class="col">
+                <label>Dependencia/Entidad</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Dependencia/Entidad" formControlName="entidad">
+                    <button class="btn btn-secondary btninfo p-0" (click)="selInstr(0)" type="button" data-bs-toggle="modal" data-bs-target="#infoModal">
+                        <span class='fa-stack fa-lg'>
+                            <i class='fas fa-circle fa-stack-2x'></i>
+                            <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="campoFormValido('entidad')">
+                   {{errorForm('entidad')}}
+                </div>
+            </div>         
+        </div>
+        <div class="row mb-3">
+            <div class="col-lg-6">
+                <label>Periodo Anual</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Periodo Anual" formControlName="periodo">
+                    <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(1)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                        <span class='fa-stack fa-lg'>
+                            <i class='fas fa-circle fa-stack-2x'></i>
+                            <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="campoFormValido('periodo')">
+                    {{errorForm('periodo')}}
+                 </div>
+            </div>
+        </div>
+       
+        <div class="row mb-3  d-flex justify-content-end">
+            <div class="col-lg-3">
+                <button class="btn btn-primary w-100" (click)="agregarProceso()">Agregar Proceso</button>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="campoFormValido('procesos')">
+                {{errorForm('procesos')}}
+             </div>
+        </div>
+        <ng-container *ngFor="let o of procesos.controls; let i = index" formArrayName="procesos">
+            <ng-container [formGroupName]="i"> 
+                <hr class="mb-5 mt-5">
+                <div class="row mb-3">
+                    <div class="col-lg-6 mb-3">
+                        <label>No.</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="No." formControlName="no">
+                            <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(2)" type="button" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                <span class='fa-stack fa-lg'>
+                                    <i class='fas fa-circle fa-stack-2x'></i>
+                                    <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="campoFormValido('no', i)">
+                            {{errorForm('no', i)}}
+                         </div> 
+                    </div>
+                    <div class="col-lg-12 mb-3">
+                        <label>Nombre Proceso Prioritario</label>
+                        <div class="input-group">
+                           <input type="text" class="form-control" placeholder="Nombre Proceso Prioritario" formControlName="proceso">
+                            <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(3)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                <span class='fa-stack fa-lg'>
+                                    <i class='fas fa-circle fa-stack-2x'></i>
+                                    <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="campoFormValido('proceso', i)">
+                            {{errorForm('proceso', i)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label>
+                            Tipo 
+                            <br>
+                            Sustantivo/Administrativo
+                        </label>
+                        <div class="input-group">
+                            <select class="form-select" formControlName="tipo">
+                                <option value="" selected >Tipo</option>
+                                <option value="Sustantivo">Sustantivo</option>
+                                <option value="Administrativo">Administrativo</option>    
+                            </select>
+                            <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(4)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                <span class='fa-stack fa-lg'>
+                                    <i class='fas fa-circle fa-stack-2x'></i>
+                                    <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="campoFormValido('tipo', i)">
+                            {{errorForm('tipo', i)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="input-group">
+                        <p  class="fs-5">Unidad Administrativa Responsable</p>   
+                    </div>
+                </div>
+                
+                <ng-container *ngFor="let o of udAdmonArr(i).controls; let j = index" formArrayName="unidades_administrativas">
+                    <ng-container [formGroupName]="j"> 
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label>Unidad Administrativa</label>
+                                <div class="input-group">
+                                    <select class="form-select" formControlName="ud_administrativa">
+                                        <option value="" selected >Unidad Administrativa</option>
+                                        <option [value]="dep.id_departamento" *ngFor="let dep of departamentos">{{dep.departamento}}</option>
+                                    </select>
+                                    <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(5)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                        <span class='fa-stack fa-lg'>
+                                            <i class='fas fa-circle fa-stack-2x'></i>
+                                            <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="alert alert-danger" role="alert" *ngIf="campoFormValido('ud_administrativa', i, j)">
+                                    {{errorForm('ud_administrativa', i, j)}}
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row mb-3 d-flex justify-content-end" *ngIf="j > 0">
+                            <div class="col-lg-3">
+                                <button class="btn btn-danger w-100" (click)="eliminarUdAdmon(i, j)">Eliminar</button>
+                            </div>
+                        </div>
+                        
+                    </ng-container>
+                </ng-container>
+                <div class="row mb-3  d-flex justify-content-end">
+                    <div class="col-lg-3">
+                        <button class="btn btn-primary w-100" (click)="agregarUdAdmon(i)">Agregar Ud Administrativa</button>
+                        <div class="alert alert-danger" role="alert" *ngIf="campoFormValido('ud_administrativa', i)">
+                            {{errorForm('ud_administrativa, i)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                
+                    <div class="col">
+                        <div class="input-group">
+                            <p  class="fs-5 m-0 pr-5">Criterios de Selección</p>
+                            <button class="btn btn-secondary btninfo" type="button" (click)="selInstr(6)" data-bs-toggle="modal" data-bs-target="#infoModal" style="font-size: 8px;">
+                                <span class='fa-stack fa-lg'>
+                                    <i class='fas fa-circle fa-stack-2x'></i>
+                                    <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                </span>
+                            </button> 
+                        </div>
+            
+                    </div>
+                </div>
+
+                <div class="row mb-3">   
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="crit_I">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              I
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="crit_II">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              II
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="crit_III">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              III
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="crit_IV">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              IV
+                            </label>
+                        </div>
+                        
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="crit_V">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              V
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="crit_VI">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              VI
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="crit_VII">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              VII
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="crit_VIII">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              VIII
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3  d-flex justify-content-end" *ngIf="i > 0">
+                    <div class="col-lg-3">
+                        <button class="btn btn-danger w-100" (click)="eliminarProceso(i)">Eliminar Proceso</button>
+        
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+       
+    </form>
+    <div class="row mb-3">
+        <button class="btn btn-success" (click)="guardar()">Guardar</button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{instruccion.campo}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{instruccion.error}}
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11" *ngIf="toast">
+    <div id="liveToast" class="toast show fade bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">Inventario de Procesos guardado de manera satisfactoria.
+        </div>
+    </div>
+</div>
+
+<span>Value</span>
+<pre>{{form.value | json}}</pre>
+
+
+
+

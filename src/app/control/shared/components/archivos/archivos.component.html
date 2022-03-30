@@ -1,0 +1,10 @@
+<div class="wrapper ml-4 mb-4" >
+    <h2 class="mb-3">Evidencias</h2>
+    <div *ngFor="let evidencia of evidencias; let i = index;" class="border rounded mb-3">
+        <div class="alert alert-light alert-dismissible fade show pt-3 pb-0" role="alert">
+            <a [href]="baseUrl+evidencia.archivo" download target="_blank" class="text-decoration-none"> 
+                <strong class="d-inline-block text-truncate"  style="max-width: 100%;"> {{evidencia.archivo}}</strong>
+            </a>
+        </div>
+    </div>
+</div>

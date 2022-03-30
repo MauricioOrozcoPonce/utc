@@ -1,0 +1,24 @@
+<div class="wrapper ml-4 mb-4" >
+    <h2 class="mb-3">Evidencias</h2>
+    
+
+    <div *ngFor="let archivo of archivos; let i = index;" class="border rounded mb-3">
+        <div class="alert alert-light alert-dismissible fade show pt-3 pb-0" role="alert">
+            <strong class="d-inline-block text-truncate">{{archivo.name}}</strong>
+            <button type="button" class="btn-close" (click)="borrarArchivo(i)"></button>
+        </div>
+    </div>
+    <div *ngFor="let evidencia of evidencias; let i = index;" class="border rounded mb-3">
+        <div class="alert alert-light alert-dismissible fade show pt-3 pb-0" role="alert">
+            <a [href]="baseUrl+evidencia.archivo" download target="_blank" class="text-decoration-none"> 
+                <strong class="d-inline-block text-truncate"  style="max-width: 100%;"> {{evidencia.archivo}}</strong>
+            </a>
+            <button type="button" class="btn-close" (click)="borrarEvidencia(i, evidencia.id_archivo)"></button>
+        </div>
+    </div>
+    <div class="custom-input-file w-100 btn btn-success">
+        <input type="file" class="input-file" (change)="cargarArchivo($event)">
+        <i class="fa fa-plus"></i> Agregar Evidencia
+    </div>
+</div>
+

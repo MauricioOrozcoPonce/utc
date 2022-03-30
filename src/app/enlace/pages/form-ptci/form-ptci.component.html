@@ -1,0 +1,306 @@
+<div class="row">
+    <div class="col-lg-8"> 
+        <div class="wrapper  ml-4 mb-4 w-100" >
+            <h2>REPORTE DE AVANCE CUATRIMESTRAL DEL PROGRAMA DE TRABAJO DE CONTROL INTERNO (PTCI)</h2>
+            <form [formGroup]="form">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label>Dependencia/Entidad</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Dependencia/Entidad" formControlName="dependencia">
+                            <button class="btn btn-secondary btninfo p-0" (click)="selInstr(0)" type="button" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                <span class='fa-stack fa-lg'>
+                                    <i class='fas fa-circle fa-stack-2x'></i>
+                                    <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="campoFormValido('dependencia')">
+                            {{ errorForm(0, ['required']) }}
+                            {{errorCampo[0].error}}
+                        </div> 
+                    </div>         
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label>No. de Avance</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="No. de Avance" formControlName="no_avance">
+                            <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(1)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                <span class='fa-stack fa-lg'>
+                                    <i class='fas fa-circle fa-stack-2x'></i>
+                                    <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="campoFormValido('no_avance')">
+                            {{ errorForm(1, ['required', 'pattern']) }}
+                            {{errorCampo[1].error}}
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Periodo Anual</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Periodo Anual" formControlName="periodo_anual">
+                            <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(2)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                <span class='fa-stack fa-lg'>
+                                    <i class='fas fa-circle fa-stack-2x'></i>
+                                    <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="campoFormValido('periodo_anual')">
+                            {{ errorForm(2, ['required', 'minLength', 'maxLength', 'pattern']) }}
+                            {{errorCampo[2].error}}
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="row mb-3  d-flex justify-content-end">
+                    <div class="col-lg-3">
+                        <button class="btn btn-primary w-100" (click)="agregarProceso()">Agregar</button>
+                        <div class="alert alert-danger" role="alert" *ngIf="campoFormValido('procesos')">
+                            {{ errorForm(3, ['required']) }}
+                            {{errorCampo[3].error}}
+                        </div>
+                    </div>
+                </div>
+                <ng-container *ngFor="let o of procesos.controls; let i = index" formArrayName="procesos">
+                    <ng-container [formGroupName]="i"> 
+                        <hr class="mb-5 mt-5">
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <label>No.</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="No." formControlName="no">
+                                    <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(3)" type="button" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                        <span class='fa-stack fa-lg'>
+                                            <i class='fas fa-circle fa-stack-2x'></i>
+                                            <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="alert alert-danger" role="alert" *ngIf="campoFormPValido(i,'no')">
+                                    {{ errorFormP(i, 0, 'no', ['required', 'pattern'])}}
+                                    {{errorProceso[i][0].error}}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Proceso Prioritario</label>
+                                <div class="input-group mb-3">
+                                    <select class="form-select" formControlName="proceso_prioritario">
+                                        <option value="" selected >Proceso Prioritario</option>
+                                        <option [value]="proceso.id_proceso" *ngFor="let proceso of procesos_prioritarios">{{proceso.proceso}}</option> 
+                                        
+                                    </select>
+                                    <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(4)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                        <span class='fa-stack fa-lg'>
+                                            <i class='fas fa-circle fa-stack-2x'></i>
+                                            <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="alert alert-danger" role="alert" *ngIf="campoFormPValido(i,'proceso_prioritario')">
+                                    {{ errorFormP(i, 1, 'proceso_prioritario', ['required'])}}
+                                    {{errorProceso[i][1].error}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label>Acciones de Mejora</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Acciones de Mejora" formControlName="accion_mejora">
+                                <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(5)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                    <span class='fa-stack fa-lg'>
+                                        <i class='fas fa-circle fa-stack-2x'></i>
+                                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="campoFormPValido(i,'accion_mejora')">
+                                {{ errorFormP(i, 2, 'accion_mejora', ['required'])}}
+                                {{errorProceso[i][2].error}}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <label>Unidad Administrativa</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Unidad Administrativa" formControlName="ud_administrativa">
+                                    <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(6)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                        <span class='fa-stack fa-lg'>
+                                            <i class='fas fa-circle fa-stack-2x'></i>
+                                            <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="alert alert-danger" role="alert" *ngIf="campoFormPValido(i,'ud_administrativa')">
+                                    {{ errorFormP(i, 3, 'ud_administrativa', ['required'])}}
+                                    {{errorProceso[i][3].error}}
+                                </div>
+                            </div> 
+                            <div class="col-lg-6">
+                                <label>Responsable de la Aplicación</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Responsable de la Aplicación" formControlName="respons_aplicacion">
+                                    <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(7)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                        <span class='fa-stack fa-lg'>
+                                            <i class='fas fa-circle fa-stack-2x'></i>
+                                            <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="alert alert-danger" role="alert" *ngIf="campoFormPValido(i,'respons_aplicacion')">
+                                    {{ errorFormP(i, 4, 'respons_aplicacion', ['required', 'maxLength'])}}
+                                    {{errorProceso[i][4].error}}
+                                </div>
+                            </div>    
+                        </div>
+                        <div class="row mb-3">
+                            <div class="input-group">
+                                <p  class="fs-5">Fechas</p>   
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Inicio</label>
+                                <div class="input-group mb-3">
+                                    <input type="date" class="form-control" placeholder="Inicio" formControlName="inicio">
+                                    <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(8)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                        <span class='fa-stack fa-lg'>
+                                            <i class='fas fa-circle fa-stack-2x'></i>
+                                            <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="alert alert-danger" role="alert" *ngIf="campoFormPValido(i,'inicio')">
+                                    {{ errorFormP(i, 5, 'inicio', ['required'])}}
+                                    {{errorProceso[i][5].error}}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Término</label>
+                                <div class="input-group mb-3">
+                                    <input type="date" class="form-control" placeholder="Término" formControlName="termino">
+                                    <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(8)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                        <span class='fa-stack fa-lg'>
+                                            <i class='fas fa-circle fa-stack-2x'></i>
+                                            <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="alert alert-danger" role="alert" *ngIf="campoFormPValido(i,'termino')">
+                                    {{ errorFormP(i, 6, 'termino', ['required'])}}
+                                    {{errorProceso[i][6].error}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3"> 
+                            <label>Medio(s) de Verificación</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Medio(s) de Verificación" formControlName="medio_verificacion">
+                                <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(9)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                    <span class='fa-stack fa-lg'>
+                                        <i class='fas fa-circle fa-stack-2x'></i>
+                                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="campoFormPValido(i,'medio_verificacion')">
+                                {{ errorFormP(i, 7, 'medio_verificacion', ['required'])}}
+                                {{errorProceso[i][7].error}}
+                            </div>
+                        </div>    
+                        <div class="row mb-3">
+                            <label>Resultados Esperados</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Resultados Esperados" formControlName="resultados_esperados">
+                                <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(10)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                    <span class='fa-stack fa-lg'>
+                                        <i class='fas fa-circle fa-stack-2x'></i>
+                                        <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="campoFormPValido(i,'resultados_esperados')">
+                                {{ errorFormP(i, 8, 'resultados_esperados', ['required'])}}
+                                {{errorProceso[i][8].error}}
+                            </div>
+                        </div>  
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <label>Estatus</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Estatus" formControlName="estatus_proceso">
+                                    <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(11)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                        <span class='fa-stack fa-lg'>
+                                            <i class='fas fa-circle fa-stack-2x'></i>
+                                            <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="alert alert-danger" role="alert" *ngIf="campoFormPValido(i,'estatus_proceso')">
+                                    {{ errorFormP(i, 9, 'estatus_proceso', ['required', 'maxLength'])}}
+                                    {{errorProceso[i][9].error}}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Porcentaje del Avance</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Porcentaje del Avance" formControlName="avance">
+                                    <button class="btn btn-secondary btninfo p-0" type="button" (click)="selInstr(12)" data-bs-toggle="modal" data-bs-target="#infoModal">
+                                        <span class='fa-stack fa-lg'>
+                                            <i class='fas fa-circle fa-stack-2x'></i>
+                                            <i class='fas fa-info fa-stack-1x fa-inverse text-muted'></i>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="alert alert-danger" role="alert" *ngIf="campoFormPValido(i,'avance')">
+                                    {{ errorFormP(i, 10, 'avance', ['required', 'pattern','max', 'min'])}}
+                                    {{errorProceso[i][10].error}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3  d-flex justify-content-end">
+                            <div class="col-lg-3">
+                                <button class="btn btn-danger w-100" (click)="eliminarProceso(i)">Eliminar</button>
+                
+                            </div>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            
+            </form>
+            <div class="row mb-3">
+                <button class="btn btn-primary" (click)="guardar()">Guardar</button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{instruccion.campo}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {{instruccion.error}}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <app-archivos (onNewFile)="setEvidencia($event)"></app-archivos>
+    </div>
+</div>
+
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11" *ngIf="toast">
+    <div id="liveToast" class="toast show fade bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">PTCI guardado de manera satisfactoria.</div>
+    </div>
+</div>
+
+
