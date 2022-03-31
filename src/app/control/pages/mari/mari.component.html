@@ -1,1 +1,379 @@
-<p>mari works!</p>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="wrapper ml-4 mb-4 w-100">
+            <form autocomplete="off" [formGroup]="form">
+            <div class="input-group">
+                <p  class="fs-5"> Administración de Riesgos Institucional</p>   
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label>Dependencia/Entidad</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Dependencia/Entidad" formControlName="dependencia">
+                    </div>
+                </div>
+                <div class="col">
+                    <label>Institución</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Institución" formControlName="institucion">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-lg-2">
+                    <label>Año</label>
+                    <div class="input-group mb-3">      
+                        <input type="text" class="form-control" placeholder="Año" formControlName="anio">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col">
+                    <label>Titular del Sujeto Obligado</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Titular del Sujeto Obligado" formControlName="titular">
+                    </div>
+                </div>
+                <div class="col">
+                    <label>Coordinador de Control Interno</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Coordinador de Control Interno" formControlName="coordinador">
+                    </div>
+                </div>
+            </div>
+        
+            <div class="row mb-3">
+                <div class="col">
+                    <label>Enlace del Sistema de Control Interno</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Enlace del Sistema de Control Interno" formControlName="enlace">
+                    </div>
+                </div>
+            </div>
+        
+        
+            <ng-container *ngFor="let o of riesgos.controls; let i = index" formArrayName="riesgos">
+                <hr class="mb-5 mt-5">
+                <ng-container [formGroupName]="i">
+                    <div class="input-group">
+                        <p  class="fs-5">I. EVALUACIÓN RIESGOS</p>   
+                    </div>
+                    <div class="row mb-">
+                        <div class="col-lg-3">
+                            <label>No. Riesgo</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="No. Riesgo"  formControlName="no_riesgo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label>Unidad Administrativa</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Unidad Administrativa" formControlName="ud_administrativa">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="input-group">
+                            <p  class="fs-5">Alineación a Estrategias, Objetivos, o Metas Institucionales</p>   
+                        </div>
+                        <div class="col-lg-3">
+                            <label>Selección</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="" formControlName="sel_estrategia">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label>Descripción</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Descripción" formControlName="desc_estrategia">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">                                    
+                        <div class="col">
+                            <label>Riesgo</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="RIESGO" formControlName="riesgo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label>Nivel de decisión del Riesgo</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Nivel de decisión del Riesgo" formControlName="nivel_decis_riesgo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="input-group">
+                            <p  class="fs-5">Clasificación del Riesgo</p>   
+                        </div>
+                        <div class="col">
+                            <label>Selección</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Selección" formControlName="sel_clasificacion">
+                            </div>
+                        </div>
+                        <div class="col" *ngIf="otros[i]">
+                            <label>Otro</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Especificar Otro" formControlName="otro">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <ng-container *ngFor="let o of factoresArr(i).controls; let j = index;" formArrayName="factores">
+                        <hr class="mb-5 mt-5">
+                        <ng-container [formGroupName]="j">
+                            <div class="row mb-3">
+                                <div class="input-group">
+                                    <p  class="fs-5">FACTOR</p>   
+                                </div>
+                                <div class="col-3">
+                                    <label>No. de Factor</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="No. de Factor" formControlName="no_factor" >
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label>Descripción</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Descripción" formControlName="desc_factor">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label>Clasificación</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Clasificación" formControlName="clasificacion_factor">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label>Tipo</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Tipo" formControlName="tipo_factor">         
+                                    </div>
+                                </div>                       
+                            </div>
+                        </ng-container>
+                    </ng-container>     
+                    <div class="row mb-3">      
+                        <div class="col">
+                            <hr class="mb-5 mt-5">
+                            <label>Posibles efectos del Riesgo</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Posibles efectos del Riesgo" formControlName="efectos_riesgo">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <p  class="fs-5">Valoración Inicial</p>   
+                        </div>
+                        <div class="col">
+                            <label>Grado Impacto</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Grado Impacto" formControlName="grado_impacto">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label>Probabilidad de Ocurrencia</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Probabilidad de Ocurrencia" formControlName="probabilidad_ocurrencia">
+                            </div>
+                        </div>
+                    </div>    
+                </ng-container>                   
+            </ng-container>
+        
+            <ng-container *ngFor="let o of riesgos.controls; let i = index" formArrayName="riesgos">
+                <ng-container [formGroupName]="i">
+                    <ng-container *ngFor="let o of factoresArr(i).controls; let j = index;" formArrayName="factores">
+                        <hr class="mb-5 mt-5">
+                        <ng-container [formGroupName]="j">
+                            <div class="input-group">
+                                <p  class="fs-5">II. EVALUACIÓN DE CONTROLES</p>   
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label>¿Tiene controles?</label>
+                                    <div class="input-group mb-3">
+                                        <select class="form-select" formControlName="control">
+                                            <option value="" selected >¿Tiene controles?</option>
+                                            <option value="1">Si</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <ng-container *ngFor="let o of controlesArr(i, j).controls; let k = index" formArrayName="controles">
+                                <hr class="mb-5 mt-5">
+                                <ng-container [formGroupName]="k">
+                                    <div class="row mb-3">
+                                        <div class="input-group">
+                                            <p  class="fs-5">CONTROL</p>   
+                                        </div>
+                                        <div class="col-3">
+                                            <label>No. Control</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder="No. control" formControlName="no_control">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <label>Descripción</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder="Descripción" formControlName="desc_control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label>Tipo</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder="Tipo control" formControlName="tipo_control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group">
+                                            <p  class="fs-5">Determinación de Suficiencia o Deficiencia del Control</p>   
+                                        </div>
+                                        <div class="col">
+                                            <label>¿Está Documentado?</label>
+                                            <div class="input-group mb-3">
+                                                <select class="form-select" formControlName="documentado">
+                                                    <option value="" selected >¿Está Documentado?</option>
+                                                    <option value="1">Si</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <label>¿Está Formalizado?</label>
+                                            <div class="input-group mb-3">
+                                                <select class="form-select" formControlName="formalizado">
+                                                    <option value="" selected >¿Está Formalizado?</option>
+                                                    <option value="1">Si</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>     
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <label>¿Se Aplica?</label>
+                                            <div class="input-group mb-3">
+                                                <select class="form-select" formControlName="aplica">
+                                                    <option value="" selected >¿Se Aplica?</option>
+                                                    <option value="1">Si</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <label>¿Es Efectivo?</label>
+                                            <div class="input-group mb-3">    
+                                                <select class="form-select" formControlName="efectivo">
+                                                    <option value="" selected >¿Es Efectivo?</option>
+                                                    <option value="1">Si</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <hr class="mb-5 mt-5">
+                        </div>
+                        <div class="input-group">
+                            
+                            <p  class="fs-5">III. VALORACIÓN  DE RIESGOS</p>   
+                        </div>
+                        <div class="input-group">
+                            <p  class="fs-5">Valoración Final</p>   
+                        </div>
+                        <div class="col">
+                            <label>Grado Impacto</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Grado Impacto" formControlName="grado_impacto_f">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label>Probabilidad de Ocurrencia</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Probabilidad de Ocurrencia" formControlName="probabilidad_ocurrencia_f">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <hr class="mb-5 mt-5">
+                        </div>
+                        <div class="input-group">
+                            <p  class="fs-5">IV. MAPA DE RIESGOS</p>   
+                        </div>
+                        <div class="col">
+                            ...
+                        </div>
+                    </div>
+        
+                    <div class="row mb-3">
+                        <div class="col">
+                            <hr class="mb-5 mt-5">
+                        </div>
+                        <div class="input-group">
+                            <p  class="fs-5">V. ESTRATEGIAS Y ACCIONES</p>   
+                        </div>
+                        <div class="col">
+                            <label>Estrategia para Administrar el Riesgo</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Estrategia para Administrar el Riesgo" formControlName="estrat_riesgo">
+                            </div>
+                        </div>
+                    </div>
+                    <ng-container *ngFor="let o of factoresArr(i).controls; let i = index" formArrayName="factores">
+                            <hr class="mb-5 mt-5">
+                        <ng-container [formGroupName]="i">
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label>Descripción de la(s) Acción(es)</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Descripción de la(s) Acción(es)" formControlName="desc_acciones">
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    
+                </ng-container>
+            </ng-container>
+            <div class="row">
+                <div class="col">
+                    
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <button class="btn btn-success mr-2" style="width: 150px;" (click)="validar('Aceptado')"><i class="fas fa-check"></i> Aceptar</button>
+                    <button class="btn btn-danger"  style="width: 150px;" (click)="validar('Rechazado')"><i class="fas fa-times"></i> Rechazar</button>
+                </div>
+            </div>
+        </form>
+        </div> 
+    </div>
+    <div class="col-lg-4">
+        <app-comentarios></app-comentarios>
+    </div>
+</div>
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11" *ngIf="toast">
+    <div id="liveToast" class="toast show fade bg-success text-white" [ngClass]="estilo" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">{{msg}}</div>
+    </div>
+</div>
+
+

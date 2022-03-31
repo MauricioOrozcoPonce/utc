@@ -3,7 +3,7 @@
 		<div class="col-xl-12 col-md-12 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
 				<div class="card-body">
-					<h1 class="h3 mb-0 text-gray-800 mb-4">PTCI</h1>
+					<h1 class="h3 mb-0 text-gray-800 mb-4">Documentos sin validar</h1>
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -15,9 +15,18 @@
 							</tr>
 						</thead>
 						<tbody>
+							<tr  *ngFor="let doc of mari;">
+                                <td>{{doc.departamento}}</td>
+								<td>{{ doc.anio }}</td>
+								<td>MARI</td>
+								<td>{{ doc.nombre +' '+ doc.apellido_p +' '+ doc.apellido_m }}</td>
+								<td>
+									<a routerLink="../validar-documento/mari/{{doc.id_mari}}" class="pl-2 text-decoration-none"><i class="fas fa-eye"></i> Ver</a>
+								</td>
+							</tr>
 							<tr  *ngFor="let doc of ptci;">
                                 <td>{{doc.departamento}}</td>
-								<td>{{ doc.no_avance }}</td>
+								<td>{{ doc.periodo_anual }}</td>
 								<td>PTCI</td>
 								<td>{{ doc.nombre +' '+ doc.apellido_p +' '+ doc.apellido_m }}</td>
 								<td>

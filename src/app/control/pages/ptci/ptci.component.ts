@@ -76,7 +76,7 @@ export class PtciComponent implements OnInit {
 					this.procesos.push(this.formProcesos());
 				}
 				this.procesos.controls[i].get('no')?.setValue(res[i].no);
-				this.procesos.controls[i].get('proceso_prioritario')?.setValue(res[i].id_proceso_inv);
+				this.procesos.controls[i].get('proceso_prioritario')?.setValue(res[i].proceso);
 				this.procesos.controls[i].get('accion_mejora')?.setValue(res[i].accion_mejora);
 				this.procesos.controls[i].get('ud_administrativa')?.setValue(res[i].ud_administrativa);
 				this.procesos.controls[i].get('respons_aplicacion')?.setValue(res[i].respons_aplicacion);

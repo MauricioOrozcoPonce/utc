@@ -8,6 +8,7 @@ import { Criterio, Inv, Proceso_P } from '../interfaces/inventario.interface';
 import { Departamento } from '../interfaces/departamento.interface';
 import { Evidencia } from '../interfaces/evidencia.interface';
 import { Comentario } from '../interfaces/comentario.interface';
+import { control, factor, MARI, riesgo } from '../interfaces/mari.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,58 @@ export class DocumentosService {
   private baseUrl: string = environment.baseUrl;
 
   constructor(private http: HttpClient, private auth:AuthService) { }
+
+  agregarMari(mari:MARI){
+    let data = {
+      'mari': mari,
+      'auth': this.auth.auth
+    }
+    return this.http.post<number|any>(`${ this.baseUrl }/documentos/mari`, data );
+  }
+  
+  getMari(): Observable<MARI[]> {
+    return this.http.post<MARI[]>(`${ this.baseUrl }/documentos/mari_departamento`, this.auth.auth);
+  }
+
+  getMariPendiente(){
+    return this.http.post<MARI[]>(`${ this.baseUrl }documentos/mari_pendiente`, this.auth.auth);
+  }
+  
+  actualizarMari(mari: MARI, id:string){
+    let data = {
+      'mari': mari,
+      'auth': this.auth.auth
+    }
+    return this.http.post<number|any>(`${ this.baseUrl }/documentos/mari_update/${id}`, data );
+  }
+  
+  getMariPorId(id_mari:string){
+    let data = {
+      'id_mari': id_mari,
+      'auth': this.auth.auth
+    }
+    return this.http.post<riesgo[]>(`${ this.baseUrl }/documentos/mari_id`,  data);
+  }
+  
+  getFactorPorId(id_riesgo:number){
+    let data = {
+      'id_riesgo': id_riesgo,
+      'auth': this.auth.auth
+    }
+    return this.http.post<factor[]>(`${ this.baseUrl }/documentos/factor_id`,  data);
+  }
+  
+  getControlPorId(id_factor:number){
+    let data = {
+      'id_factor': id_factor,
+      'auth': this.auth.auth
+    }
+    return this.http.post<control[]>(`${ this.baseUrl }/documentos/control_id`, data);
+  }
+
+
+
+
 
   getProcesoUd(){
     return this.http.post<any[]>(`${ this.baseUrl }documentos/proceso_ud`, this.auth.auth);

@@ -25,7 +25,7 @@ export interface Proceso{
     apellido_m: string;
     no: string;
     id_proceso_inv: string;
-    proceso_prioritario: string;
+    proceso: string;
     accion_mejora: string;
     ud_administrativa: string;
     respons_aplicacion: string;

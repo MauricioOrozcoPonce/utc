@@ -52,7 +52,7 @@ export class MariComponent implements OnInit {
 			nivel_decis_riesgo: ['',  Validators.required],
 			sel_clasificacion:['', Validators.required],
 			otro: ['', [] ],
-			factores: this.fb.array([], Validators.required),
+			factores: this.fb.array([this.formFactores()], Validators.required),
 			efectos_riesgo: ['', Validators.required],
 			grado_impacto: ['', Validators.required],
 			probabilidad_ocurrencia: ['', Validators.required],
